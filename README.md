@@ -6,6 +6,8 @@
 
 **在线体验**：https://data-analysis-agent-37742.app.workbuddy.host/?sharecode=MDLWGW7HWJ
 
+![数据分析 Agent 工作区：趋势分析与结论](docs/screenshot-workspace.png)
+
 ---
 
 ## 它解决什么问题
@@ -33,6 +35,10 @@
 | 云端持久化 | 数据集与分析历史存云端，跨设备可继续 |
 
 内置一份示例数据（18 个月 × 3 区域 × 3 产品线，含两个刻意埋入的异常月），没有数据也能一键试跑。
+
+同一份数据换一种问法，就是另一种视角——按产品线看构成：
+
+![产品线销售额构成分析](docs/screenshot-composition.png)
 
 ## 架构
 
@@ -159,6 +165,8 @@ python3 -m http.server 8080
 
 登录采用邮箱或手机号验证码（免密码，首次登录自动创建账号），需要在云服务控制台开启对应的登录方式。
 
+![登录界面](docs/screenshot-login.png)
+
 ## 目录结构
 
 ```
@@ -170,6 +178,7 @@ python3 -m http.server 8080
 │   ├── analytics.js           数据引擎（无 DOM 依赖）
 │   ├── app.js                 应用逻辑
 │   └── styles.css             设计系统
+├── docs/                      界面截图
 ├── LICENSE
 └── README.md
 ```
