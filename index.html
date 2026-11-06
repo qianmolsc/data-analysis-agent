@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="gdyey3LbvjVDfRWrcXl0Gf"><head data-page-node-id="JoOGSkQfWyUNURonqHTYKo">
+<meta charset="utf-8" data-page-node-id="0n8uuYAgzdSWlE2Vb06gGL">
+<meta name="viewport" content="width=device-width, initial-scale=1" data-page-node-id="rARNxGcn0BkCXVMavdFZpe">
+<title>数据分析 Agent</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" data-page-node-id="kcTNF5lTA3J3ljac38jrfF">
+<link rel="stylesheet" href="assets/styles.css" data-page-node-id="X6yZdM5hua4ip5p2rmGVsL">
+<style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
+<body data-page-node-id="XhPkPGEjpOo3NBi9MRKSUf" style="">
+
+<div id="bootScreen" class="boot-screen hidden" data-page-node-id="1ozK02EQxJImoWeG98zJ81">
+  <div class="boot-mark" data-page-node-id="06n5rwhu3uqgJVRpyBXh13">◧</div>
+  <div class="spinner" data-page-node-id="7zl6GtHclwe18tNLuCcDds"></div>
+  <p id="bootText" data-page-node-id="3xVmFukcv33uG7UBY4TKNm">正在连接云端服务…</p>
+</div>
+
+<!-- ============ 登录 ============ -->
+<div id="authView" class="auth-view">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <span class="logo-mark">◧</span>
+      <strong>数据分析 Agent</strong>
+    </div>
+    <h1>登录 / 创建账号</h1>
+    <p class="auth-sub">用邮箱或手机号验证码登录，首次登录自动创建账号。你的数据集与分析记录都会保存在云端。</p>
+
+    <div id="authTabs" class="tabs">
+      <button type="button" class="tab active" data-tab="email">邮箱登录</button>
+      <button type="button" class="tab" data-tab="phone">手机号登录</button>
+    </div>
+
+    <form id="authForm" novalidate>
+      <div id="emailPane">
+        <label class="field">
+          <span>邮箱地址</span>
+          <input id="emailInput" type="email" autocomplete="email" placeholder="you@example.com">
+        </label>
+      </div>
+
+      <div id="phonePane" class="hidden">
+        <label class="field">
+          <span>手机号</span>
+          <input id="phoneInput" type="tel" inputmode="numeric" autocomplete="tel" maxlength="11" placeholder="请输入 11 位手机号">
+        </label>
+      </div>
+
+      <div class="otp-row">
+        <label class="field">
+          <span>验证码</span>
+          <input id="otpInput" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6 位验证码">
+        </label>
+        <button type="button" id="sendCodeBtn" class="btn ghost">获取验证码</button>
+      </div>
+
+      <p id="authError" class="form-error hidden"></p>
+
+      <button type="submit" id="verifyBtn" class="btn primary block">登录 / 注册</button>
+    </form>
+
+    <p class="auth-foot">验证码登录免密码 · 数据仅可见于你的账号</p>
+  </div>
+</div>
+
+<!-- ============ 主应用 ============ -->
+<div id="appView" class="app hidden" data-page-node-id="Xclrhlkg9mOZZ6bxV5fTZ0">
+  <aside class="sidebar" data-page-node-id="Tim3U1GMpARDJLxQAI6qoo">
+    <div class="side-brand" data-page-node-id="JEnaITAd1TdYsKuWXBMae0">
+      <span class="logo-mark" data-page-node-id="MeZpEhKdPEVANVcobqRel5">◧</span>
+      <div data-page-node-id="ZAKDN4m6EJpp5ZezY2PFf3">
+        <strong data-page-node-id="pmGdAS8yflDJz7HIVQBYRG">数据分析 Agent</strong>
+        <small data-page-node-id="ybkAObdFKq6riEL0R8Jy1t">上传数据 · 自然语言分析</small>
+      </div>
+    </div>
+
+    <button id="newDatasetBtn" class="btn primary block side-new" data-page-node-id="HGUBglfdavlHI1TPYEBhIL">
+      <span class="plus" data-page-node-id="TDNAOAHoNfkCduMbKjg7h6">＋</span> 新建数据集
+    </button>
+
+    <div class="side-section-title" data-page-node-id="LNrjnTT1dcL2nFFMmaQob2">我的数据集</div>
+    <div id="datasetList" class="dataset-list" data-page-node-id="FnsDG1udo8dspuvl9nyWZz">
+      <div class="side-empty" data-page-node-id="WERZzEKIS1yWltAm1I8Zlw">还没有数据集</div>
+    </div>
+
+    <div class="side-foot" data-page-node-id="RhLyCv4FhUcbIw9RrAwNEq">
+      <div class="user-chip" data-page-node-id="VYrLYplJNl9l8T7pl4d2rn">
+        <div class="avatar" id="userAvatar" data-page-node-id="kSXiZAEFkqpeUl4JxVS5J1">分</div>
+        <div class="user-meta" data-page-node-id="JR4zKKhcY67jG8xyIJcKh5">
+          <strong id="userName" data-page-node-id="LGKfh40V3oDGl2XuZhyqMs">分析用户</strong>
+          <small id="userSub" data-page-node-id="Bny2gVQ5GwWMpH2By3RpPb">已连接云端</small>
+        </div>
+      </div>
+      <button id="logoutBtn" class="btn ghost tiny" title="退出登录" data-page-node-id="FHOLQfFEHYmwKJKV5Ugs6F">退出</button>
+    </div>
+  </aside>
+
+  <main class="main" data-page-node-id="zEzGzjHgSS1G7SxxgQhTpp">
+    <header class="topbar" data-page-node-id="aUBBFOBDVpFYpldc6q4p13">
+      <div class="topbar-left" data-page-node-id="xpPuKjo6WAI4Sw1LiGoBWF">
+        <h2 id="topTitle" data-page-node-id="nHkpWcv3e9Cgii29bXbOkU">选择或新建数据集</h2>
+        <p id="topMeta" data-page-node-id="kW4sqizAjkwCL1MlEqRwvJ">支持 CSV / TSV / Excel / 粘贴表格</p>
+      </div>
+      <div class="topbar-actions" data-page-node-id="XwI3mpyvUU7kNalNhIdewF">
+        <button id="previewDataBtn" class="btn ghost small hidden" data-page-node-id="41jiRBVrCtfrYlAZMnJhvo">查看原始数据</button>
+        <button id="deleteDatasetBtn" class="btn ghost small danger hidden" data-page-node-id="gNyCQlMSyAMwkZLuVd4o2v">删除数据集</button>
+      </div>
+    </header>
+
+    <!-- 空状态 -->
+    <section id="emptyState" class="empty-state" data-page-node-id="4CpPTUuqRijBN927CBqtqK">
+      <div class="empty-card" data-page-node-id="I0MnYyqj11RVdP6AaXpF7W">
+        <div class="empty-icon" data-page-node-id="MxyWeVwN4MnRtsB0xcube2">◧</div>
+        <h3 data-page-node-id="SWcWPXhkFUCzbbSV17IMHT">把数据放进来，剩下的交给 Agent</h3>
+        <p data-page-node-id="ZDeApGQKkawwrWimk2CD8T">上传 CSV / Excel 或直接粘贴表格，然后用一句话提问：趋势、异常、对比、排名，Agent 会自动取数、算指标、出图并给出结论。</p>
+        <div class="empty-actions" data-page-node-id="Jt3kdrCbjQVB2tHrt3F4Nn">
+          <button id="emptyUploadBtn" class="btn primary" data-page-node-id="RHJKK6onyLIliambsz7h7Y">上传 / 粘贴数据</button>
+          <button id="sampleBtn" class="btn ghost" data-page-node-id="VL5NIkKKPeztlTZgdzj6zf">载入示例数据</button>
+        </div>
+        <div class="empty-hints" data-page-node-id="B8r50ACvfb76cGyI23XUmH">
+          <span data-page-node-id="myDelQWcVCoNSRWhjGwvTp">· 数据保存在云端，随时可回到历史分析</span>
+          <span data-page-node-id="d7xD6xmPDzPDH0bPOKUQAA">· 指标由本地引擎按真实数据计算，不由模型编造</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 工作区 -->
+    <section id="workspace" class="workspace hidden" data-page-node-id="ESrfA8SOP1w0BVX6bnK0ud">
+      <div class="stat-row" id="statRow" data-page-node-id="taoaAy2tweucvinmO1zpYA"></div>
+      <div class="thread" id="thread" data-page-node-id="oEFvwrfPUgX4tL2yvaXO1D"></div>
+      <div class="composer-wrap" data-page-node-id="4fbMoiDd1QB8vfrcrJ6CZB">
+        <div class="chips" id="chips" data-page-node-id="hGu9ta5pH8enyWayd72KQW"></div>
+        <form class="composer" id="askForm" data-page-node-id="kqdYM8jZVc7OWvCiNj3Gf4">
+          <textarea id="askInput" rows="1" placeholder="问问这份数据，例如：按月看销售额趋势，哪几个月明显异常？"></textarea>
+          <button type="submit" id="askBtn" class="btn primary send" title="发送" data-page-node-id="QX9tnRhmfNZkIBjllFZF9Y">发送</button>
+        </form>
+        <div class="composer-foot" data-page-node-id="iJsmrX3N4k8KjFGnkOKwCb">Enter 发送 · Shift + Enter 换行 · 数字与图表均基于当前数据集真实计算</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ============ 新建数据集 ============ -->
+<div id="uploadModal" class="modal hidden" data-page-node-id="0yoAlGID1fnUywZcX9DBYz">
+  <div class="modal-card" data-page-node-id="ZF4IUmCPnWjbwksOZUBVPb">
+    <header class="modal-head" data-page-node-id="qob34P1yyV4U3YOIFoHi6U">
+      <div data-page-node-id="wfoA46AoT6zgj9EXEXAtXT">
+        <h3 data-page-node-id="QSIlUcY0XfH9TXnkpx489L">新建数据集</h3>
+        <p data-page-node-id="SCLkFQxu35CytI9LLh6lzr">首行为列名，支持逗号 / 制表符 / 分号分隔；Excel 请先另存为 CSV，或直接上传 .xlsx</p>
+      </div>
+      <button type="button" class="icon-btn" id="closeUploadBtn" aria-label="关闭" data-page-node-id="Fwv1fAGC5SEzukBSDTRa3C">✕</button>
+    </header>
+
+    <div class="modal-body" data-page-node-id="wn8MW9OUPsCHUMuH5gzB9P">
+      <div class="rows-note" id="rowsNote" data-page-node-id="bIcBQrErsvHl3va7nvIj48"></div>
+
+      <div class="tabs" data-page-node-id="z0ZXgqtbAxtjx5MvciLHYa">
+        <button type="button" class="tab active" data-utab="file" data-page-node-id="LskfOzBmh8NhOlsw2Pn64L">上传文件</button>
+        <button type="button" class="tab" data-utab="paste" data-page-node-id="sg88s7co9eWobYSw96A1Kc">粘贴表格</button>
+      </div>
+
+      <div id="filePane" data-page-node-id="8x8HTDqvORa0mEA0dsH70a">
+        <div class="dropzone" id="dropzone" data-page-node-id="mdt7Vf9JTKqFoUpntOG5X6">
+          <div class="dz-icon" data-page-node-id="KkTGtSh0UVw8kshI4rjHhM">↑</div>
+          <p data-page-node-id="WMjqODeEw5vmMWWYF8gjkN"><strong data-page-node-id="VxET1XsMdSgMFDagDgq9vF">点击选择文件</strong> 或拖拽到这里</p>
+          <small data-page-node-id="tCrBqQV2P088ICDsKExczO">CSV · TSV · TXT · JSON · XLSX（≤ 8MB，最多 5000 行）</small>
+          <input type="file" id="fileInput" accept=".csv,.tsv,.txt,.json,.xlsx,.xls" hidden="" data-page-node-id="KXDllioHmhahDQRCvgxUPd">
+        </div>
+        <p class="file-name hidden" id="fileName" data-page-node-id="WG2aBZTDBHJ7UzbOlCK9wz"></p>
+      </div>
+
+      <div id="pastePane" class="hidden" data-page-node-id="F8M9Ua2cD9XjBaeHtAjUEK">
+        <textarea id="pasteArea" class="paste-area" placeholder="把 Excel / 表格里的内容直接粘贴到这里，第一行是列名，例如：
+月份	地区	销售额
+2025-01	华东	128000
+2025-02	华东	143500"></textarea>
+        <button type="button" id="parsePasteBtn" class="btn ghost small" data-page-node-id="ZfS6CpYOVkWyFQfFjktf6D">解析粘贴内容</button>
+      </div>
+
+      <div id="previewWrap" class="preview-wrap hidden" data-page-node-id="jko10jR1knrLVEW27iVC93">
+        <div class="preview-head" data-page-node-id="xXKFR5ERX4nq8jDYn0kCaO">
+          <span id="previewInfo" data-page-node-id="bXkouOFwfsDxNVEDbanuKG"></span>
+          <label class="inline-field" data-page-node-id="uBtzw7eDFpiifDnUdQ0pq4">数据集名称
+            <input id="datasetNameInput" type="text" placeholder="例如：2025 年销售明细" data-page-node-id="JOetKAERo5ebEjP3UHILit">
+          </label>
+        </div>
+        <div class="table-scroll" data-page-node-id="RRxYO2O6eQ6ejraqwnKqnm"><table id="previewTable" class="data-table" data-page-node-id="UEpvgTqYrHQGSnAzt7TGjP"></table></div>
+      </div>
+
+      <p id="uploadError" class="form-error hidden" data-page-node-id="fN9K9rfcQDoCmHdLhGBhDi"></p>
+    </div>
+
+    <footer class="modal-foot" data-page-node-id="i6BQalLW9yXA3TBKLqRHIe">
+      <button type="button" class="btn ghost" id="cancelUploadBtn" data-page-node-id="rUo5ZcCm3EAIU6KrHPPVL0">取消</button>
+      <button type="button" class="btn primary" id="saveDatasetBtn" disabled="" data-page-node-id="EKKpPfb2fShQm9sAjCkFgj">保存到云端</button>
+    </footer>
+  </div>
+</div>
+
+<!-- ============ 原始数据 ============ -->
+<div id="previewModal" class="modal hidden" data-page-node-id="cj370rcpdB6AesHI8v7RnP">
+  <div class="modal-card wide" data-page-node-id="DvXGAe7s1G7DNRUFbY2BeX">
+    <header class="modal-head" data-page-node-id="pDtoGlLPgIIMbbGWEWpQCE">
+      <div data-page-node-id="Lz7llHJD2rv20R1OreAzj2">
+        <h3 id="previewTitle" data-page-node-id="pkSmYrkXp9zuoTgX9ruYSs">原始数据</h3>
+        <p id="previewSub" data-page-node-id="YzexB7R01hH0iA8KjGlb08"></p>
+      </div>
+      <button type="button" class="icon-btn" id="closePreviewBtn" aria-label="关闭" data-page-node-id="LWLrggeMHAs2xDAA1Op3rz">✕</button>
+    </header>
+    <div class="modal-body" data-page-node-id="N45RGZHE1MmvWexwIBklgJ">
+      <div class="table-scroll tall" data-page-node-id="npwEJPxLFjsBsnfsnTQCZg"><table id="rawTable" class="data-table" data-page-node-id="iC29AxqgE9S4LyA92XidLr"></table></div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden" data-page-node-id="GmMaHCXGF15Kq7FfYror2Q"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tencent-ai/workbuddy-cloud-sdk@dev/lib/index.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="assets/config.js"></script>
+<script src="assets/analytics.js"></script>
+<script src="assets/app.js"></script>
+
+
+</body></html>

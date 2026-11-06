@@ -1,0 +1,17 @@
+# 本地云端配置（含真实 endpoint 与 publishableKey），仓库内请使用 config.example.js
+assets/config.js
+
+# 内部工具产物
+.workbuddy/
+.wbapp_*.genie
+
+# 编辑器与系统文件
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 日志与临时文件
+*.log
+*.tmp
